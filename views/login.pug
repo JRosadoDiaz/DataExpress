@@ -1,0 +1,13 @@
+extend layout
+
+block content
+    form(action="/login" method="GET")
+        p Username:
+            input(type="text", name="username")
+        p Password:
+            input(type="text", name="password")
+        p
+            input(type="submit" value="Login")
+    p Don't have an account?
+        a(href="signup") Sign up!
+        

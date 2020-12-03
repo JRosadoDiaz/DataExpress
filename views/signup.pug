@@ -1,0 +1,20 @@
+extend layout
+
+block content
+    form(action="/register", method="post")
+        p Email:
+            input(type="text", name="email")
+        p Age:
+            input(type="number", name="age")
+        p Username:
+            input(type="text", name="username")
+        p Password:
+            input(type="password", name="password")
+        p Favorite Pizza Topping?
+            input(type="text", name="question_1")
+        p Astrology sign?
+            input(type="text", name="question_2")
+        p Are Unicorns real?
+            input(type="text", name="question_3")
+        p  
+            input(type="submit", value="Register Account")
