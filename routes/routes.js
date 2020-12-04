@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
-mongoose.connect("mongodb://localhost/data", {
+mongoose.connect("mongodb+srv://Admin:DefaultPassword@cluster0.afwzj.mongodb.net/<dbname>?retryWrites=true&w=majority", {
     useUnifiedTopology: true,
     useNewUrlParser: true
 });
@@ -32,15 +32,15 @@ function addUserByRequest(req) {
     
     User.exists({ username: name }, (err, result) => {
         if (err) return console.error(err);
-        if(result) {
+        if(!result) {
             let user = new User({
-                username: name,
-                password: pass,
+                username: username,
+                password: password,
                 email: req.body.email,
                 age: req.body.age,
-                question1: req.body.question1,
-                question2: req.body.question2,
-                question3: req.body.question3,
+                question1: req.body.question_1,
+                question2: req.body.question_2,
+                question3: req.body.question_3,
                 loginTime: new Date().toLocaleTimeString()
             });
         
@@ -62,7 +62,7 @@ function addUserByObject(user) {
     
     User.exists({ username: name }, (err, result) => {
         if (err) return console.error(err);
-        if(result) {
+        if(!result) {
         
             user.save((err, user) => {
                 if (err) return console.error(err);
@@ -100,9 +100,9 @@ function updateUser(req) {
         user.password = pass,
         user.email = req.body.email,
         user.age = req.body.age,
-        user.question1 = req.body.question1,
-        user.question2 = req.body.question2,
-        user.question3 = req.body.question3
+        user.question1 = req.body.question_1,
+        user.question2 = req.body.question_2,
+        user.question3 = req.body.question_3
     
         user.save((err, user) => {
             if (err) return console.error(err);
@@ -126,8 +126,8 @@ exports.login = (req, res) => {
 
 exports.checkUserLogin = (req, res) => {
 
-    currentUser = getUser(req.username, req.password);
-
+    let currentUser = getUser(req.username, req.password);
+    console.log("user logged in: " + currentUser);
     // res.setHeader('Location', '/');
     res.render("profile", {
         title: currentUser.username,
@@ -143,7 +143,18 @@ exports.signup = (req, res) => {
 }
 
 exports.registerUser = (req, res) => {
-    let msg = addUserByRequest(req);
+    let user = new User({
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        age: req.body.age,
+        question1: req.body.question_1,
+        question2: req.body.question_2,
+        question3: req.body.question_3,
+        loginTime: new Date().toLocaleTimeString()
+    });
+
+    let msg = addUserByObject(user);
     res.render("index", {
         title: "Home",
         message: msg
