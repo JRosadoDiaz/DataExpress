@@ -160,3 +160,14 @@ exports.registerUser = (req, res) => {
         message: msg
     });
 }
+
+exports.api = (req, res) => {
+    // let data;
+    // User.find((err, users) => {
+    //     if (err) return console.error(err);
+
+    //     data = users;
+    // });
+
+    // res.json(data);
+}

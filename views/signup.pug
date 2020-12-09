@@ -11,10 +11,20 @@ block content
         p Password:
             input(type="password", name="password")
         p Favorite Pizza Topping?
-            input(type="text", name="question_1")
+            select(name="question_1")
+                option(value="Cheese") Cheese
+                option(value="Pepperoni") Pepperoni
+                option(value="Sausage") Sausage
+                option(value="Crust") Crust
         p Astrology sign?
-            input(type="text", name="question_2")
+            select(name="question_2")
+                option(value="Sage") Sage
+                option(value="Rosemary") Rosemary
+                option(value="Thyme") Thyme
         p Are Unicorns real?
-            input(type="text", name="question_3")
+            select(name="question_3")
+                option(value="Yes") Yes
+                option(value="No") No
+                option(value="Monday") Only on Mondays
         p  
             input(type="submit", value="Register Account")

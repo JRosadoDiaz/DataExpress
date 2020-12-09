@@ -13,11 +13,13 @@ const urlEncodedParser = bodyParser.urlencoded({
 
 app.set("view engine", "pug");
 app.set("views", __dirname+"/views");
+app.use(express.static(path.join(__dirname + "/public")));
 
 app.get("/", routes.index);
 app.get("/login", routes.login);
 app.post("/login", urlEncodedParser, routes.checkUserLogin)
 app.get("/signup", routes.signup);
 app.post("/register", urlEncodedParser, routes.registerUser);
+app.get("/api", routes.api);
 
 app.listen(3000);
